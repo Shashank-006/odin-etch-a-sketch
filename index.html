@@ -9,7 +9,14 @@
     <body>
         <h1 class="title">Etch-a-Sketch</h1>
         <p class="instructions">Hold Shift to draw!</p>
-        <button class="size-button">Pick a size!</button>
+        <div class="options">
+            <button>Color Selector:</button>
+            <div class="color-option">
+                <label for="color-selector">Select a color:</label>
+                <input type="color" id="color-selector" value="#0000FF">
+            </div>
+            <button class="size-button">Pick a size!</button>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

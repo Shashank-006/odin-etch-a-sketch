@@ -3,6 +3,7 @@ const squareLength = 16;
 const boxContainer = document.createElement("div");
 boxContainer.classList.toggle("boxContainer");
 const sizeButton = document.querySelector(".size-button");
+const colorInput = document.querySelector("#color-selector");
 
 function buildSquares(length) {
     for(let i = 0; i < length; i++) {
@@ -12,9 +13,6 @@ function buildSquares(length) {
             const square = document.createElement("div");
             square.classList.toggle("square");
             row.appendChild(square);
-            /*const squareContent = document.createElement("div");
-            squareContent.classList.toggle("squareContent");
-            square.appendChild(squareContent);*/
         }
         boxContainer.appendChild(row);
     }
@@ -29,20 +27,23 @@ function randomHue() {
     return Math.floor(Math.random() * 256);
 }
 
-const mapOpacity = new Map();
-
-boxContainer.addEventListener("mouseover", (e) => {
+function mouseColor(e, red = randomHue(), green = randomHue(), blue = randomHue()) {
     const square = e.target;
     if(square.classList.contains("square") && e.shiftKey) {
         if(mapOpacity.has(square)) {
             mapOpacity.get(square).opacity += 0.1;
         } else {
-            mapOpacity.set(square, {opacity: 0.1, red: randomHue(), green: randomHue(), blue: randomHue()});
+            mapOpacity.set(square, {opacity: 0.1, r: red, g: green, b: blue});
         }
         const colors = mapOpacity.get(square);
-        square.setAttribute("style", `background-color: rgb(${colors.red}, ${colors.green}, ${colors.blue}, ${colors.opacity})`);
+        square.setAttribute("style", `background-color: rgb(${colors.r}, ${colors.g}, ${colors.b}, ${colors.opacity})`);
     }
-});
+}
+
+const mapOpacity = new Map();
+
+let lastListener = mouseColor;
+boxContainer.addEventListener("mouseover", mouseColor);
 
 sizeButton.addEventListener("click", () => {
     let result;
@@ -54,6 +55,20 @@ sizeButton.addEventListener("click", () => {
     
     removeSquares();
     buildSquares(result);
+});
+
+colorInput.addEventListener("input", () => {
+    boxContainer.removeEventListener("mouseover", lastListener);
+    const hexadecimalColor = colorInput.value;
+    
+    lastListener = (e) => {
+        const r = parseInt(hexadecimalColor.slice(1, 3), 16);
+        const g = parseInt(hexadecimalColor.slice(3, 5), 16);
+        const b = parseInt(hexadecimalColor.slice(5), 16);
+
+        mouseColor(e, r, g, b);
+    }
+    boxContainer.addEventListener("mouseover", lastListener);
 });
 
 buildSquares(squareLength);
