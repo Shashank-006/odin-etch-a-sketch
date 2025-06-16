@@ -22,6 +22,7 @@ html {
     aspect-ratio: 1 / 1;
     box-sizing: border-box;
     flex-basis: 100%;
+    transition-duration: 0.3s;
 }
 
 .boxContainer {

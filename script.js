@@ -14,4 +14,11 @@ for(let i = 0; i < squareLength; i++) {
     boxContainer.appendChild(row);
 }
 
+boxContainer.addEventListener("mouseover", (e) => {
+    const square = e.target;
+    if(square.classList.contains("square")) {
+        square.setAttribute("style", "background-color: blue");
+    }
+})
+
 document.body.appendChild(boxContainer);
