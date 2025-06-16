@@ -21,14 +21,7 @@ html {
     border: 2px solid black;
     aspect-ratio: 1 / 1;
     box-sizing: border-box;
-    flex: 1 1 20px;
-}
-
-.box {
-    display: flex;
-    flex-direction: column;
-    aspect-ratio: 1 / 1;
-    flex: 1 1 100px;
+    flex-basis: 100%;
 }
 
 .boxContainer {
@@ -37,8 +30,7 @@ html {
     flex: 0 1 800px;
     border: black solid 2px;
     aspect-ratio: 1 / 1;
-
-
+    flex-direction: column;
 }
 
 .row {
