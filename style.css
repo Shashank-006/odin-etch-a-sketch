@@ -18,6 +18,10 @@ html {
     text-align: center;
 }
 
+.instructions {
+    margin-top: 0;
+}
+
 .square {
     border: 2px solid black;
     aspect-ratio: 1 / 1;
@@ -25,6 +29,11 @@ html {
     flex-basis: 100%;
     transition-duration: 0.3s;
 }
+
+/*.squareContent {
+    box-sizing: border-box;
+    width: 100%;
+}*/
 
 .boxContainer {
     display: flex;
