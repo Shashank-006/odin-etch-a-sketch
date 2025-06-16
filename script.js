@@ -25,18 +25,22 @@ function removeSquares() {
     rows.forEach(r => boxContainer.removeChild(r));
 }
 
+function randomHue() {
+    return Math.floor(Math.random() * 256);
+}
+
 const mapOpacity = new Map();
 
 boxContainer.addEventListener("mouseover", (e) => {
     const square = e.target;
     if(square.classList.contains("square") && e.shiftKey) {
         if(mapOpacity.has(square)) {
-            mapOpacity.set(square, mapOpacity.get(square) + 0.1);
+            mapOpacity.get(square).opacity += 0.1;
         } else {
-            mapOpacity.set(square, 0.1);
+            mapOpacity.set(square, {opacity: 0.1, red: randomHue(), green: randomHue(), blue: randomHue()});
         }
-
-        square.setAttribute("style", `background-color: rgb(0, 0, 255, ${mapOpacity.get(square)})`);
+        const colors = mapOpacity.get(square);
+        square.setAttribute("style", `background-color: rgb(${colors.red}, ${colors.green}, ${colors.blue}, ${colors.opacity})`);
     }
 });
 
