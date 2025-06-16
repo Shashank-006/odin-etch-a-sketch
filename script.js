@@ -31,9 +31,9 @@ function mouseColor(e, red = randomHue(), green = randomHue(), blue = randomHue(
     const square = e.target;
     if(square.classList.contains("square") && e.shiftKey) {
         if(mapOpacity.has(square)) {
-            mapOpacity.get(square).opacity += 0.1;
+            mapOpacity.get(square).opacity += 0.2;
         } else {
-            mapOpacity.set(square, {opacity: 0.1, r: red, g: green, b: blue});
+            mapOpacity.set(square, {opacity: 0.2, r: red, g: green, b: blue});
         }
         const colors = mapOpacity.get(square);
         square.setAttribute("style", `background-color: rgb(${colors.r}, ${colors.g}, ${colors.b}, ${colors.opacity})`);
